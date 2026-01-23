@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, View, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -71,12 +71,12 @@ export default function MapScreen() {
     fetchOccupancy();
   }, []);
 
-  const handleMarkerPress = (carpark: Carpark) => {
+  const handleMarkerPress = useCallback((carpark: Carpark) => {
     setSelectCarpark(carpark);
     bottomSheetRef.current?.expand();
-  };
+  }, []);
 
-  const getMarkerColour = (total: number, spots: number) => {
+  const getMarkerColour = useCallback((total: number, spots: number) => {
     const occupiedPercent = Math.round((total / spots) * 100);
     const vacantPercent = 100 - occupiedPercent;
     if (vacantPercent >= 75) {
@@ -86,7 +86,7 @@ export default function MapScreen() {
     } else {
       return '#ff0000ff';
     }
-  };
+  }, []);
 
   const handleGetDirections = (latitude: number, longitude: number, name: string) => {
     showLocation({
@@ -107,7 +107,6 @@ export default function MapScreen() {
           </View>
         ) : (
           <MapView
-            key={theme}
             ref={mapRef}
             style={styles.map}
             initialRegion={{
@@ -119,7 +118,7 @@ export default function MapScreen() {
             showsUserLocation={true}
             provider={PROVIDER_GOOGLE}
             showsMyLocationButton
-            customMapStyle={theme === 'dark' ? mapDarkStyle : undefined}
+            customMapStyle={theme === 'dark' ? mapDarkStyle : []}
           >
             {
               locations.map((marker) => {
