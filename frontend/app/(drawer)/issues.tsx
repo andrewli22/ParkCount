@@ -1,8 +1,10 @@
 import { useThemeStyles } from '@/utils/themeStyles';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 import { Alert, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { sendFeedback } from '@/utils/api';
+import { useFocusEffect } from 'expo-router';
+
 
 export default function IssuesScreen() {
   const data = [
@@ -13,8 +15,14 @@ export default function IssuesScreen() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [subject, setSubject] = useState<string>('');
   const [issue, setIssue] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSendIssue = async () => {
+    if (!subject || !issue) {
+      setErrorMessage('Please fill in all the fields before submitting');
+      return;
+    }
+    setErrorMessage('');
     try {
       await sendFeedback(`BUG: ${subject}`, issue);
       Alert.alert(
@@ -26,9 +34,18 @@ export default function IssuesScreen() {
         }}]
       );
     } catch (error) {
-      console.error('API error sending feedback - frontend', error);
+      console.error('API error sending issue - frontend', error);
+      setErrorMessage('Failed to send issue. Please try again.');
     }
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      setErrorMessage('');
+      setIssue('');
+      setSubject('');
+    }, [])
+  );
 
   return (
     <View style={[themeStyle.background, { flex: 1 }]}>
@@ -69,6 +86,12 @@ export default function IssuesScreen() {
         <TouchableOpacity style={styles.submitButtonContainer} onPress={() => handleSendIssue()}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
+        {/* Error message */}
+        {errorMessage && (
+          <Text style={[{ color: 'red', textAlign: 'center', marginTop: 10 }]}>
+            {errorMessage}
+          </Text>
+        )}
       </View>
     </View>
   )

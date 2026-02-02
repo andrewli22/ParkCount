@@ -1,8 +1,9 @@
 import { useThemeStyles } from '@/utils/themeStyles';
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { sendFeedback } from '@/utils/api';
+import { useFocusEffect } from 'expo-router';
 
 export default function FeedbackScreen() {
   const themeStyle = useThemeStyles();
@@ -14,6 +15,11 @@ export default function FeedbackScreen() {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSendFeedback = async () => {
+    if (!subject || !feedback) {
+      setErrorMessage('Please fill in all the fields before submitting');
+      return;
+    }
+
     setErrorMessage('');
     try {
       await sendFeedback(`FEEDBACK: ${subject}`, feedback);
@@ -30,6 +36,14 @@ export default function FeedbackScreen() {
       setErrorMessage('Failed to send feedback. Please try again.');
     }
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      setErrorMessage('');
+      setFeedback('');
+      setSubject('');
+    }, [])
+  );
 
   return (
     <View style={[styles.container, themeStyle.background, { flex: 1 }]}>
