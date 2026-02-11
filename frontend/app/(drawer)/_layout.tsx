@@ -29,13 +29,6 @@ export default function DrawerLayout() {
         }}
       />
       <Drawer.Screen
-        name='feedback'
-        options={{
-          drawerLabel: 'Feedback',
-          title: 'Feedback',
-        }}
-      />
-      <Drawer.Screen
         name='issues'
         options={{
           drawerLabel: 'Report an issue',

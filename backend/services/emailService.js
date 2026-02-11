@@ -1,7 +1,7 @@
 import { SendEmailCommand } from '@aws-sdk/client-ses';
 import { sesClient } from './sesClient.js';
 
-export const sendEmail = async (name, subject, message) => {
+export const sendEmail = async (subject, message) => {
   const params = {
     Source: 'parkingappproject55@gmail.com',
     Destination: {
@@ -18,7 +18,7 @@ export const sendEmail = async (name, subject, message) => {
           Charset: 'UTF-8',
         },
         Html: {
-          Data: `<html><body><p>${name}</p><p>${message}</p></body></html>`,
+          Data: `<html><body><p>${message}</p></body></html>`,
           Charset: 'UTF-8',
         },
       },

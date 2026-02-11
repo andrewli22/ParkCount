@@ -1,6 +1,6 @@
 import { useThemeStyles } from '@/utils/themeStyles';
-import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-import { Switch, Text, View } from 'react-native';
+import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
+import { Linking, Switch, Text, View } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 
 export default function DarkModeSlider(props: DrawerContentComponentProps) {
@@ -10,6 +10,11 @@ export default function DarkModeSlider(props: DrawerContentComponentProps) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
+      <DrawerItem
+        label="Leave a review"
+        labelStyle={{ color: theme === 'dark' ? '#fff' : '#000' }}
+        onPress={() => Linking.openURL('https://apps.apple.com/au/app/parkcount/id6756878356')}
+      />
       <View style={{ paddingHorizontal: 16, paddingTop: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <Text style={[themeStyle.textColor, { fontSize: 14, fontWeight: '500' }]}>Dark Mode</Text>
         <Switch
