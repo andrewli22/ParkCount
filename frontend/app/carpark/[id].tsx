@@ -104,9 +104,9 @@ export default function CarparkScreen() {
     showLocation({
       latitude: lat,
       longitude: long,
-      title: facilityName,
-      googleForceLatLon: true,
-      alwaysIncludeGoogle: true
+      title: `Park&Ride - ${facilityName}`,
+      // googleForceLatLon: true,
+      // alwaysIncludeGoogle: true
     })
   };
   

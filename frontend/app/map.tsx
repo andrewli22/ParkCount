@@ -92,9 +92,9 @@ export default function MapScreen() {
     showLocation({
       latitude: latitude,
       longitude: longitude,
-      title: name,
-      googleForceLatLon: true,
-      alwaysIncludeGoogle: true
+      title: `Park&Ride - ${name}`,
+      // googleForceLatLon: true,
+      // alwaysIncludeGoogle: true
     })
   }
 

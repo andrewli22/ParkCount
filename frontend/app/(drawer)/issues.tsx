@@ -18,13 +18,15 @@ export default function IssuesScreen() {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSendIssue = async () => {
-    if (!subject || !issue) {
+    const subjectInput = subject.trim();
+    const issueInput = issue.trim();
+    if (!subjectInput || !issueInput || subjectInput.length < 1 || issueInput.length < 1) {
       setErrorMessage('Please fill in all the fields before submitting');
       return;
     }
     setErrorMessage('');
     try {
-      await sendFeedback(`BUG: ${subject}`, issue);
+      await sendFeedback(`BUG: ${subjectInput}`, issueInput);
       Alert.alert(
         'Success',
         'Issue successfully. A team member will review it soon!',
@@ -79,7 +81,7 @@ export default function IssuesScreen() {
           placeholderTextColor={themeStyle.textColor.color}
           multiline
           placeholder="Describe the issue"
-          style={[styles.textInputStyles, themeStyle.borderColor, themeStyle.textColor, { height: 200, marginBottom: 10 }]}
+          style={[styles.textInputStyles, themeStyle.borderColor, themeStyle.textColor, { height: 200, marginBottom: 10, textAlignVertical: 'top' }]}
           onChangeText={setIssue}
           value={issue}
         />
