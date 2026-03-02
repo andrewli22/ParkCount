@@ -12,3 +12,6 @@ This personal project was built to learn React Native and explore mobile app dev
 
 ## Attributions
 - App icon designed using icons from [Iconify](https://iconify.design/) via Figma
+
+## Privacy Policy
+https://andrewli22.github.io/ParkCount/
