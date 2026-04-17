@@ -4,7 +4,8 @@ ParkCount is an app that displays real-time data on parking availability across 
 
 This personal project was built to learn React Native and explore mobile app development. It also aims to solve a personal frustration of not knowing carpark availability in advance, so I could plan my commute and catch my trains on time.
 
-iOS: https://apps.apple.com/au/app/parkcount/id6756878356
+iOS: [ParkCount AppStore](https://apps.apple.com/au/app/parkcount/id6756878356)
+Android: [ParkCount PlayStore](https://play.google.com/store/apps/details?id=com.b3ef.parkingapp)
 
 ## Tech Stack
 - **Frontend**: React Native (Expo), TypeScript
