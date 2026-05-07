@@ -93,8 +93,7 @@ export default function MapScreen() {
       latitude: latitude,
       longitude: longitude,
       title: `Park&Ride - ${name}`,
-      // googleForceLatLon: true,
-      // alwaysIncludeGoogle: true
+      appsWhiteList: ['google-maps', 'apple-maps', 'waze']
     })
   }
 
@@ -178,7 +177,7 @@ export default function MapScreen() {
           </View>
           <View style={{ width: '100%', marginBottom: 40 }}>
             <TouchableOpacity
-              style={styles.submitButtonContainer}
+              style={[styles.submitButtonContainer, { backgroundColor: theme === 'dark' ? '#007AFF' : '#34CEFF' }]}
               onPress={() => selectCarpark && handleGetDirections(selectCarpark.latitude, selectCarpark.longitude, selectCarpark.suburb)}
             >
               <Text style={styles.buttonText}>Get Directions</Text>
@@ -251,7 +250,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   submitButtonContainer: {
-    backgroundColor: '#34ceff',
     alignItems: 'center',
     padding: 15,
     borderRadius: 25,

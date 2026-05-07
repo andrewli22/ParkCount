@@ -85,7 +85,7 @@ export default function IssuesScreen() {
           onChangeText={setIssue}
           value={issue}
         />
-        <TouchableOpacity style={styles.submitButtonContainer} onPress={() => handleSendIssue()}>
+        <TouchableOpacity style={[styles.submitButtonContainer, { backgroundColor: theme === 'dark' ? '#007AFF' : '#34CEFF' }]} onPress={() => handleSendIssue()}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
         {/* Error message */}
@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   submitButtonContainer: {
-    backgroundColor: '#34ceff',
     alignItems: 'center',
     padding: 15,
     borderRadius: 25
